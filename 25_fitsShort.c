@@ -10,7 +10,14 @@
  */
 int fitsShort(int x)
 {
-    return 2;
+    // if the upper 17 bits of x is the same, then x can fit into short 
+
+    // first shift x to the right by 15,
+    // then shift a different instance of x to the right by 16
+    // after which we use XOR to check whether or not the upper 17 bits are all the same
+    // if same -> XOR will return 0, but that means it "passes", so we use logical NOT to 
+    // return 1, ie. true
+    return !((x >> 15) ^ (x >> 16));
 }
 
 int test_fitsShort(int x)
